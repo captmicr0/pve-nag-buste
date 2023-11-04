@@ -23,11 +23,9 @@ SCRIPT="$(basename "$0")"
 
 # disable license nag: https://johnscs.com/remove-proxmox51-subscription-notice/
 
-if grep -qs "$NAGTOKEN" "$NAGFILE" > /dev/null 2>&1; then
-  echo "$SCRIPT: Removing Nag ..."
-  sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
-  systemctl restart pveproxy.service
-fi
+echo "$SCRIPT: Removing Nag ..."
+sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+systemctl restart pveproxy.service
 
 # disable paid repo list
 
